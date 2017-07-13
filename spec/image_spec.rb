@@ -16,6 +16,10 @@ describe Image do
                                  ["O", "O", "O", "O", "O"]]
   end
 
+  it 'will raise an error if dimensions are too big' do
+    expect{ described_class.new(255, 5) }.to raise_error "Maximum size of #{described_class::MAX_IMAGE_SIZE} x #{described_class::MAX_IMAGE_SIZE} exceeded"
+  end
+
   it 'can colour one pixel' do
     subject.colour_pixel(3,2, 'C')
     expect(subject.image).to eq [["O", "O", "O", "O", "O"],
