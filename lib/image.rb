@@ -11,7 +11,7 @@ class Image
   end
 
   def colour_pixel(x, y, colour)
-    raise 'Coordinates are off canvas' if check_coordinates?(x, y)
+    raise 'Coordinates are off canvas' if check_single_coordinate?(x, y)
     image[x.to_i - 1 ][y.to_i - 1] = colour
   end
 
@@ -31,16 +31,18 @@ class Image
     end
   end
 
-  def image_too_big?(width, height)
-    width.to_i > MAX_IMAGE_SIZE || height > MAX_IMAGE_SIZE
-  end
-
   def show_image
     image.each{ |row| STDOUT.puts(row.join(' ')) }
   end
 
-  def check_coordinates?(x, y)
-    image.dig(x, y).nil?
-  end
+  private
+
+    def image_too_big?(width, height)
+      width.to_i > MAX_IMAGE_SIZE || height > MAX_IMAGE_SIZE
+    end
+
+    def check_single_coordinate?(x, y)
+      image.dig(x.to_i, y.to_i).nil?
+    end
 
 end
