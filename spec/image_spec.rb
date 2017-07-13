@@ -2,7 +2,7 @@ require 'image'
 
 describe Image do
 
-  subject { described_class.new(5, 5) }
+  let(:subject) { described_class.new(5, 5) }
 
   it 'has a defualt value' do
     expect(described_class::DEFAULT_VALUE).to eq 'O'
@@ -60,6 +60,10 @@ describe Image do
   it 'can display the image' do
     expect(STDOUT).to receive(:puts).with("O O O O O").exactly(5).times
     subject.show_image
+  end
+
+  it 'returns an error if coordinates are outside of the image size' do
+    expect{ subject.colour_pixel(7, 5, 'C') }.to raise_error 'Coordinates are off canvas'
   end
 
 end

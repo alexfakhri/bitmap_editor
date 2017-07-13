@@ -11,6 +11,7 @@ class Image
   end
 
   def colour_pixel(x, y, colour)
+    raise 'Coordinates are off canvas' if check_coordinates?(x, y)
     image[x.to_i - 1 ][y.to_i - 1] = colour
   end
 
@@ -36,6 +37,10 @@ class Image
 
   def show_image
     image.each{ |row| STDOUT.puts(row.join(' ')) }
+  end
+
+  def check_coordinates?(x, y)
+    image.dig(x, y).nil?
   end
 
 end
