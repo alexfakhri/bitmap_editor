@@ -10,9 +10,9 @@ class Image
     @image = Array.new(height.to_i){Array.new(width.to_i, DEFAULT_VALUE)}
   end
 
-  def colour_pixel(x, y, colour)
-    raise 'Coordinates are off canvas' if check_single_coordinate?(x, y)
-    image[x.to_i - 1 ][y.to_i - 1] = colour
+  def colour_pixel(y, x, colour)
+    raise 'Coordinates are off canvas' if check_single_coordinate?(y, x)
+    image[y.to_i - 1 ][x.to_i - 1] = colour
   end
 
   def clear_image
@@ -41,8 +41,8 @@ class Image
       width.to_i > MAX_IMAGE_SIZE || height > MAX_IMAGE_SIZE
     end
 
-    def check_single_coordinate?(x, y)
-      image.dig(x.to_i, y.to_i).nil?
+    def check_single_coordinate?(y, x)
+      image.dig(y.to_i - 1, x.to_i - 1).nil?
     end
 
 end
