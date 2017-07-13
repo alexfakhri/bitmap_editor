@@ -17,7 +17,7 @@ describe Image do
   end
 
   it 'can colour one pixel' do
-    subject.colour_pixel(3,2)
+    subject.colour_pixel(3,2, 'C')
     expect(subject.image).to eq [["O", "O", "O", "O", "O"],
                                  ["O", "O", "O", "O", "O"],
                                  ["O", "C", "O", "O", "O"],
@@ -26,7 +26,7 @@ describe Image do
   end
 
   it "can reset all pixels back to 'O'" do
-    subject.colour_pixel(1,1)
+    subject.colour_pixel(1,1, 'C')
     subject.clear_image
     expect(subject.image).to eq [["O", "O", "O", "O", "O"],
                                  ["O", "O", "O", "O", "O"],
