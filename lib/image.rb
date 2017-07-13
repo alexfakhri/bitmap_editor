@@ -22,4 +22,10 @@ class Image
     end
   end
 
+  def verticle_line(x1, x2, y, colour)
+    for n in x1..x2
+      image[n.to_i - 1 ][y.to_i - 1] = colour
+    end
+  end
+
 end
