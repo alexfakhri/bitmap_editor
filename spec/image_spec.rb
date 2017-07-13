@@ -40,7 +40,7 @@ describe Image do
   end
 
   it "can fill pixels in a horizontal line" do
-    subject.horizontal_line(3, 2, 4, 'C')
+    subject.horizontal_line(2, 4, 3, 'C')
     expect(subject.image).to eq [["O", "O", "O", "O", "O"],
                                  ["O", "O", "O", "O", "O"],
                                  ["O", "C", "C", "C", "O"],
@@ -49,7 +49,7 @@ describe Image do
   end
 
   it "can fill pixels in a verticle line" do
-    subject.verticle_line(1, 3, 3, 'C')
+    subject.verticle_line(3, 1, 3, 'C')
     expect(subject.image).to eq [["O", "O", "C", "O", "O"],
                                  ["O", "O", "C", "O", "O"],
                                  ["O", "O", "C", "O", "O"],

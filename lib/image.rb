@@ -6,8 +6,8 @@ class Image
   attr_accessor :image
 
   def initialize(width, height)
-    raise "Maximum size of #{MAX_IMAGE_SIZE} x #{MAX_IMAGE_SIZE} exceeded" if image_too_big?(width, height)
-    @image = Array.new(height){Array.new(width, DEFAULT_VALUE)}
+    raise "Maximum size of #{MAX_IMAGE_SIZE} x #{MAX_IMAGE_SIZE} exceeded" if image_too_big?(width.to_i, height.to_i)
+    @image = Array.new(height.to_i){Array.new(width.to_i, DEFAULT_VALUE)}
   end
 
   def colour_pixel(x, y, colour)
@@ -18,15 +18,15 @@ class Image
     image.each{|row| row.map!{|pixle| pixle = DEFAULT_VALUE}}
   end
 
-  def horizontal_line(x, y1, y2, colour)
+  def verticle_line(x, y1, y2, colour)
     for n in y1..y2
-      image[x.to_i - 1 ][n.to_i - 1] = colour
+      image[n.to_i - 1 ][x.to_i - 1] = colour
     end
   end
 
-  def verticle_line(x1, x2, y, colour)
+  def horizontal_line(x1, x2, y, colour)
     for n in x1..x2
-      image[n.to_i - 1 ][y.to_i - 1] = colour
+      image[y.to_i - 1 ][n.to_i - 1] = colour
     end
   end
 
