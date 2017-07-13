@@ -57,5 +57,9 @@ describe Image do
                                  ["O", "O", "O", "O", "O"]]
   end
 
+  it 'can display the image' do
+    expect(STDOUT).to receive(:puts).with("O O O O O").exactly(5).times
+    subject.show_image
+  end
 
 end

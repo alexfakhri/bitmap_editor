@@ -34,4 +34,8 @@ class Image
     width.to_i > MAX_IMAGE_SIZE || height > MAX_IMAGE_SIZE
   end
 
+  def show_image
+    image.each{ |row| STDOUT.puts(row.join(' ')) }
+  end
+
 end
