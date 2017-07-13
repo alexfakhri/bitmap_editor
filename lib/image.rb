@@ -12,5 +12,8 @@ class Image
     image[x.to_i - 1 ][y.to_i - 1] = 'C'
   end
 
+  def clear_image
+    image.each{|row| row.map!{|pixle| pixle = DEFAULT_VALUE}}
+  end
 
 end
