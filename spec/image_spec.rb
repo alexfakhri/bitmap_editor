@@ -16,5 +16,14 @@ describe Image do
     expect(described_class::DEFAULT_VALUE).to eq 'O'
   end
 
+  it 'can colour one pixel' do
+    subject.colour_pixel(3,2)
+    expect(subject.image).to eq [["O", "O", "O", "O", "O"],
+                                 ["O", "O", "O", "O", "O"],
+                                 ["O", "C", "O", "O", "O"],
+                                 ["O", "O", "O", "O", "O"],
+                                 ["O", "O", "O", "O", "O"]]
+  end
+
 
 end
