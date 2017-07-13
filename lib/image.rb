@@ -16,4 +16,10 @@ class Image
     image.each{|row| row.map!{|pixle| pixle = DEFAULT_VALUE}}
   end
 
+  def horizontal_line(x, y1, y2, colour)
+    for n in y1..y2
+      image[x.to_i - 1 ][n.to_i - 1] = colour
+    end
+  end
+
 end

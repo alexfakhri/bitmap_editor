@@ -35,5 +35,14 @@ describe Image do
                                  ["O", "O", "O", "O", "O"]]
   end
 
+  it "can fill pixels in a horizontal line" do
+    subject.horizontal_line(3, 2, 4, 'C')
+    expect(subject.image).to eq [["O", "O", "O", "O", "O"],
+                                 ["O", "O", "O", "O", "O"],
+                                 ["O", "C", "C", "C", "O"],
+                                 ["O", "O", "O", "O", "O"],
+                                 ["O", "O", "O", "O", "O"]]
+  end
+
 
 end
