@@ -23,8 +23,8 @@ describe Image do
   it 'can colour one pixel' do
     subject.colour_pixel(3,2, 'C')
     expect(subject.image).to eq [["O", "O", "O", "O", "O"],
+                                 ["O", "O", "C", "O", "O"],
                                  ["O", "O", "O", "O", "O"],
-                                 ["O", "C", "O", "O", "O"],
                                  ["O", "O", "O", "O", "O"],
                                  ["O", "O", "O", "O", "O"]]
   end
@@ -63,7 +63,19 @@ describe Image do
   end
 
   it 'returns an error if coordinates are outside of the image size' do
-    expect{ subject.colour_pixel(7, 5, 'C') }.to raise_error 'Coordinates are off canvas'
+    expect{ subject.colour_pixel(6, 80, 'C') }.to raise_error 'Coordinates are off canvas'
+  end
+
+  it 'returns an error if coordinates are outside of the image size' do
+    expect{ subject.verticle_line(7, 4, 4, 'C') }.to raise_error 'Coordinates are off canvas'
+  end
+
+  it 'returns an error if coordinates are outside of the image size' do
+    expect{ subject.horizontal_line(4, 4, 7, 'C') }.to raise_error 'Coordinates are off canvas'
+  end
+
+  it 'returns an ordered range of coordinates' do
+    expect(subject.order_range(10, 4,)).to eq 4..10
   end
 
 end

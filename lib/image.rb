@@ -10,8 +10,8 @@ class Image
     @image = Array.new(height.to_i){Array.new(width.to_i, DEFAULT_VALUE)}
   end
 
-  def colour_pixel(y, x, colour)
-    raise 'Coordinates are off canvas' if check_single_coordinate?(y, x)
+  def colour_pixel(x, y, colour)
+    raise 'Coordinates are off canvas' if coordinate_exists?(x.to_i - 1, y.to_i - 1)
     image[y.to_i - 1 ][x.to_i - 1] = colour
   end
 
@@ -20,13 +20,15 @@ class Image
   end
 
   def verticle_line(x, y1, y2, colour)
-    for n in y1..y2
+    for n in order_range(y1, y2)
+      raise 'Coordinates are off canvas' if coordinate_exists?(n.to_i - 1, x.to_i - 1)
       image[n.to_i - 1 ][x.to_i - 1] = colour
     end
   end
 
   def horizontal_line(x1, x2, y, colour)
-    for n in x1..x2
+    for n in order_range(x1, x2)
+      raise 'Coordinates are off canvas' if coordinate_exists?(y.to_i - 1, n.to_i - 1)
       image[y.to_i - 1 ][n.to_i - 1] = colour
     end
   end
@@ -35,14 +37,19 @@ class Image
     image.each{ |row| STDOUT.puts(row.join(' ')) }
   end
 
+  def order_range(arg1, arg2)
+    a = [arg1, arg2].sort
+    return a.first..a.last
+  end
+
   private
 
     def image_too_big?(width, height)
       width.to_i > MAX_IMAGE_SIZE || height > MAX_IMAGE_SIZE
     end
 
-    def check_single_coordinate?(y, x)
-      image.dig(y.to_i - 1, x.to_i - 1).nil?
+    def coordinate_exists?(arg1, arg2)
+      image.dig(arg1, arg2).nil?
     end
 
 end
