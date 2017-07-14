@@ -21,12 +21,31 @@ class BitmapEditor
     if line.match(/I (\d+) (\d+)/)
       new_image(*arguments)
     else
-      image.send(COMMANDS[command], *arguments)
+      if command_valid?(command, line) == true
+        image.send(COMMANDS[command], *arguments)
+      else
+        raise 'Invalid Command Entered'
+      end
     end
   end
 
   def new_image(width, height)
     @image = Image.new(width, height)
+  end
+
+  def command_valid?(command, line)
+    case command
+      when 'C'
+        return true if line.match(/C+$/)
+      when 'L'
+        return true if line.match(/L (\d+) (\d+) (\w+)+$/)
+      when 'V'
+        return true if line.match(/V (\d+) (\d+) (\d+) (\w+)+$/)
+      when 'H'
+        return true if line.match(/H (\d+) (\d+) (\d+) (\w+)+$/)
+      when 'S'
+        return true if line.match(/S+$/)
+      end
   end
 
 end
