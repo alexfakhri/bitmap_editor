@@ -78,4 +78,17 @@ describe Image do
     expect(subject.order_range(10, 4,)).to eq 4..10
   end
 
+  it "can fill pixels in a diagonal line" do
+    subject.diagonal_line(1, 5, 4, 'C')
+    expect(subject.image).to eq [["O", "O", "O", "O", "O"],
+                                 ["O", "O", "O", "C", "O"],
+                                 ["O", "O", "C", "O", "O"],
+                                 ["O", "C", "O", "O", "O"],
+                                 ["C", "O", "O", "O", "O"]]
+  end
+
+  it 'returns an error if length of line is outside of the image size' do
+    expect{ subject.diagonal_line(1, 5, 6, 'C') }.to raise_error 'Length of line is too long'
+  end
+
 end

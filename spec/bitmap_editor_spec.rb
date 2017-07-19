@@ -12,7 +12,7 @@ describe BitmapEditor do
   end
 
   it 'has a hash of commands' do
-    expect(described_class::COMMANDS).to eq ({'C' => :clear_image, 'L' => :colour_pixel, 'V' => :verticle_line, 'H' => :horizontal_line, 'S' => :show_image, 'I' => :new_image })
+    expect(described_class::COMMANDS).to eq ({'C' => :clear_image, 'L' => :colour_pixel, 'V' => :verticle_line, 'H' => :horizontal_line, 'S' => :show_image, 'I' => :new_image, 'D' => :diagonal_line })
   end
 
   it 'should create a new image' do
@@ -60,6 +60,12 @@ describe BitmapEditor do
 
   it 'returns nil with an invalid command' do
     expect(subject.command_valid?('H', 'H 10 25 25 Z A')).to eq nil
+  end
+
+  it 'returns an image with a diagonal line on the image' do
+    subject.commands("I 3 3")
+    subject.commands("D 1 3 3 C")
+    expect(subject.commands("S")).to eq [["O", "O", "C"], ["O", "C", "O"], ["C", "O", "O"]]
   end
 
 end

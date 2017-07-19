@@ -3,7 +3,7 @@ require './lib/image'
 class BitmapEditor
 
   COMMANDS = {'C' => :clear_image, 'L' => :colour_pixel, 'V' => :verticle_line,
-              'H' => :horizontal_line, 'S' => :show_image, 'I' => :new_image }
+              'H' => :horizontal_line, 'S' => :show_image, 'I' => :new_image, 'D' => :diagonal_line }
 
   attr_reader :image
 
@@ -43,6 +43,8 @@ class BitmapEditor
         return true if line.match(/V (\d+) (\d+) (\d+) (\w+)+$/)
       when 'H'
         return true if line.match(/H (\d+) (\d+) (\d+) (\w+)+$/)
+      when 'D'
+        return true if line.match(/D (\d+) (\d+) (\d+) (\w+)+$/)
       when 'S'
         return true if line.match(/S+$/)
       end
